@@ -188,24 +188,39 @@ Frontend development chạy tại http://localhost:5173 và proxy `/api` sang ba
 
 ## Chạy test và build
 
-Backend:
-
+### 1. Backend
+Chạy unit test và tạo gói jar:
 ```bash
 cd backend
 mvn clean test
 mvn clean package
 ```
 
-Frontend:
-
+### 2. Frontend
+Cài đặt thư viện và build gói production:
 ```bash
 cd frontend
 npm install
 npm run build
 ```
 
-Kiểm tra cả project bằng Docker:
+### 3. E2E Test Suite (Selenium + PyTest)
+Mã kiểm thử tự động toàn diện tích hợp lưu ảnh chụp màn hình tự động khi gặp lỗi.
+Yêu cầu: Python 3.10+, Google Chrome cài đặt trên máy.
 
+Cấu hình môi trường ảo và chạy:
+```bash
+cd testing/selenium_pytest
+python -m venv venv
+# Kích hoạt môi trường ảo:
+# Windows PowerShell: .\venv\Scripts\Activate.ps1 (hoặc CMD: .\venv\Scripts\activate)
+# macOS / Linux: source venv/bin/activate
+
+pip install -r requirements.txt
+pytest -v
+```
+
+Kiểm tra toàn bộ project bằng Docker:
 ```bash
 docker compose build backend frontend
 ```
